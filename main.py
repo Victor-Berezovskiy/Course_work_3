@@ -1,16 +1,25 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+from develop import utils
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+def main():
+    """Функция запускающая программу"""
+    OPERATIONS_URL = "https://www.jsonkeeper.com/b/VK9M"
+    num_of_operations = 5
+
+    data, info = utils.get_data(OPERATIONS_URL)
+    if not data:
+        exit(info)
+    else:
+        print(info)
+
+    operations_executed = utils.get_operations_executed(data)
+    last_five_operations = utils.get_last_five_operations(operations_executed, num_of_operations)
+    operations_formatted = utils.get_operations_formatted(last_five_operations)
+
+    for string in operations_formatted:
+        print(f"{string}\n")
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+if __name__ == "__main__":
+    main()
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
